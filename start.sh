@@ -16,7 +16,9 @@ docker rm -f squid
 #	-e WPAD_NOPROXY_NET=192.168.168.0 \
 #        -e WPAD_NOPROXY_MASK=255.255.255.0 \
 	
+#--publish 80:80 \
 docker run --name squid \
+        -d \
 	--restart=always \
         -e SQUID_CONFIG_SOURCE=/custom-config \
         --volume $(pwd)/conf:/custom-config \
@@ -24,7 +26,6 @@ docker run --name squid \
         --volume $(pwd)/BL:/var/lib/squidguard/db/BL \
         --volume $(pwd)/squid.conf:/etc/squid3/squid.conf \
 	--publish 3128:3128 \
-	--publish 80:80 \
        	muenchhausen/docker-squidguard:latest
 
 
