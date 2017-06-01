@@ -1,6 +1,5 @@
 #!/bin/bash
 
-docker rm -f squid
 #docker run --name squid -d --restart=always \
 #    --publish 3128:3128 \
 #    --volume $(pwd)/squid.conf:/etc/squid.conf \
@@ -8,8 +7,13 @@ docker rm -f squid
 #     sameersbn/squid:3.3.8-23
 
 	
-
+if [ ! -f shallalist.tar.gz ] ; then
+   curl -LO http://www.shallalist.de/Downloads/shallalist.tar.gz
+   tar xvf shallalist.tar.gz
+fi
 	
+
+docker rm -f squid
 
 #-e UPDATE_BLACKLIST_URL=http://www.shallalist.de/Downloads/shallalist.tar.gz \
 #	-e WPAD_IP=192.168.168.101 \
